@@ -1,7 +1,9 @@
 import {useEffect, useState} from "react";
 import Header from "./Header";
 import JobCard from "./JobCard";
-import {Select, MenuItem, TextField} from "@mui/material";
+import {Select, MenuItem} from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const JobSection = () => {
   const [jobList, setJobList] = useState([]);
@@ -44,47 +46,44 @@ const JobSection = () => {
     }
   };
 
-  const handleRoleChange = (event) => {
-    setSelectedRole(event.target.value);
-    setSearchTerm(""); // Clear search term when selecting from options
+  const handleRoleChange = (newValue) => {
+    setSelectedRole(newValue);
   };
 
-  const handleSearchTermChange = (event) => {
-    setSearchTerm(event.target.value);
+  const handleSearchTermChange = (newInputValue) => {
+    setSearchTerm(newInputValue);
   };
 
   const handleMinExpChange = (event) => {
     setMinExpFilter(event.target.value);
   };
 
-  const handleLocationChange = (event) => {
-    setLocationFilter(event.target.value);
-    setSelectLocation(""); // Clear select location when typing in text field
+  const handleLocationChange = (newInputValue) => {
+    setLocationFilter(newInputValue);
   };
 
-  const handleSelectLocationChange = (event) => {
-    setSelectLocation(event.target.value);
-    setLocationFilter(""); // Clear location filter when selecting from options
+  const handleSelectLocationChange = (newValue) => {
+    setSelectLocation(newValue);
   };
 
   const handleMinJdSalaryChange = (event) => {
     setMinJdSalaryFilter(event.target.value);
   };
 
-  // Extract unique job roles
+  // Unique job roles
   const uniqueJobRoles = Array.from(new Set(jobList.map((job) => job.jobRole)));
 
-  // Extract location
+  // Location
   const uniqueLocation = Array.from(
     new Set(jobList.map((job) => job.location))
   );
 
-  // Extract unique minimum experience values and sort them
+  // Unique min exp values and sorting
   const uniqueMinExpValues = Array.from(
     new Set(jobList.map((job) => job.minExp))
   ).sort((a, b) => a - b);
 
-  // Extract unique minimum base pay values and sort them
+  // Unique min base pay values and sorting
   const minJdSalaryValues = [5, 10, 15, 20, 30, 40];
 
   const filteredJobsByRole = selectedRole
@@ -122,44 +121,35 @@ const JobSection = () => {
       </div>
 
       <div className="filters">
-        <TextField
-          label="Search Role"
-          value={searchTerm}
-          onChange={handleSearchTermChange}
-        />
-        <Select
+        {/* Search Jobs */}
+        <Autocomplete
           value={selectedRole}
-          onChange={handleRoleChange}
-          displayEmpty
-          inputProps={{"aria-label": "Select Role"}}
-        >
-          <MenuItem value="" disabled></MenuItem>
-          {/* Render unique job roles */}
-          {uniqueJobRoles.map((jobRole) => (
-            <MenuItem key={jobRole} value={jobRole}>
-              {jobRole}
-            </MenuItem>
-          ))}
-        </Select>
-        <TextField
-          label="Location"
-          value={locationFilter}
-          onChange={handleLocationChange}
+          onChange={(event, newValue) => handleRoleChange(newValue)}
+          inputValue={searchTerm}
+          onInputChange={(event, newInputValue) =>
+            handleSearchTermChange(newInputValue)
+          }
+          options={uniqueJobRoles}
+          renderInput={(params) => (
+            <TextField {...params} label="Search Role" />
+          )}
+          style={{width: 200}}
         />
-        <Select
+
+        {/* Locations */}
+        <Autocomplete
           value={selectLocation}
-          onChange={handleSelectLocationChange}
-          displayEmpty
-          inputProps={{"aria-label": "Location"}}
-        >
-          <MenuItem value="" disabled></MenuItem>
-          {/* Render unique locations */}
-          {uniqueLocation.map((location) => (
-            <MenuItem key={location} value={location}>
-              {location}
-            </MenuItem>
-          ))}
-        </Select>
+          onChange={(event, newValue) => handleSelectLocationChange(newValue)}
+          inputValue={locationFilter}
+          onInputChange={(event, newInputValue) =>
+            handleLocationChange(newInputValue)
+          }
+          options={uniqueLocation}
+          renderInput={(params) => <TextField {...params} label="Location" />}
+          style={{width: 200}} 
+        />
+
+        {/* Mininum exp */}
         <TextField
           label="Minimum Experience"
           type="number"
@@ -174,13 +164,16 @@ const JobSection = () => {
           inputProps={{"aria-label": "Select Minimum Experience"}}
         >
           <MenuItem value="" disabled></MenuItem>
-          {/* Render unique minimum experience values */}
+
+          {/* Minimum experience values */}
           {uniqueMinExpValues.map((minExp) => (
             <MenuItem key={minExp} value={minExp}>
               {minExp}
             </MenuItem>
           ))}
         </Select>
+
+        {/* Min Base Pay */}
         <TextField
           label="Minimum Base Pay (Lakhs)"
           type="number"
@@ -195,7 +188,8 @@ const JobSection = () => {
           inputProps={{"aria-label": "Select Minimum Base Pay"}}
         >
           <MenuItem value="" disabled></MenuItem>
-          {/* Render unique minimum base pay values */}
+
+          {/* Minimum base pay values */}
           {minJdSalaryValues.map((minJdSalary) => (
             <MenuItem key={minJdSalary} value={minJdSalary}>
               {minJdSalary}
