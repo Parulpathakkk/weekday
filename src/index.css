@@ -1,0 +1,110 @@
+
+body{
+    margin: 0 !important;
+}
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  width: full;
+}
+
+.profile {
+  width: auto;
+  display: flex;
+}
+.profile-left {
+  padding: 2cqw;
+  position: sticky;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: #fff;
+}
+.profile-right {
+  padding: 2cqw;
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: -10;
+  height: 100vh;
+  background-color: #bbfcea;
+}
+
+.jobMain {
+  position: relative;
+}
+
+.filters {
+  margin: 3cqw;
+}
+
+.left-arrow {
+  padding: 0.2rem;
+  z-index: 20;
+  left: 0;
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  position: absolute;
+  border-radius: 0.7cqw;
+  border: 1px solid #202021;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.right-arrow {
+  padding: 0.2rem;
+  z-index: 20;
+  right: 0;
+  transform: translateX(50%) translateY(-50%);
+  top: 50%;
+  position: absolute;
+  border-radius: 0.7cqw;
+  border: 1px solid #0c0c0c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+.main {
+  position: relative;
+  width: auto;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 50;
+}
+
+.header-main {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.jobList-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem;
+  margin: 3rem;
+}
+
+.jobCard {
+  border-width: 0.1rem;
+  border-color: #4b5563;
+  border-style: solid;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  display: flex;
+  align-items: stretch;
+  padding: 1rem;
+}
+
+.jobCard-heading {
+  display: flex;
+  gap: 1cqw;
+}
