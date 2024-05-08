@@ -15,7 +15,7 @@ const Header = () => {
     </Toolbar>
     <div className="right-arrow"><KeyboardArrowLeftIcon/></div>
     </div>
-    <Divider/>
+    {/* <Divider/> */}
     </>
   )
 }

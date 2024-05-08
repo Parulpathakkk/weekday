@@ -13,7 +13,7 @@ body{
   display: flex;
 }
 .profile-left {
-  padding: 2cqw;
+  padding: 2.5cqw;
   position: sticky;
   left: 0;
   top: 0;
@@ -21,7 +21,7 @@ body{
   background-color: #fff;
 }
 .profile-right {
-  padding: 2cqw;
+  padding: 2.5cqw;
   position: sticky;
   right: 0;
   top: 0;
@@ -76,28 +76,32 @@ body{
   position: sticky;
   top: 0;
   background: white;
+  padding: 0.5cqw 0;
   z-index: 50;
+  border-radius: 1cqw;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .header-main {
   position: relative;
   z-index: 10;
   width: 100%;
+ 
+  /* border:  1px solid black; */
 }
 
 .jobList-container {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 3rem;
+  gap: 2cqw;
   margin: 3rem;
 }
 
 .jobCard {
-  border-width: 0.1rem;
-  border-color: #4b5563;
-  border-style: solid;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border:0.1cqw solid rgba(90, 90, 90, 0.2),;
+  border-radius: 1cqw;
+  box-shadow: 0 4px 8px 0 rgba(90, 90, 90, 0.2), 0 6px 20px 0 rgba(118, 116, 116, 0.19);
   cursor: pointer;
   display: flex;
   align-items: stretch;
@@ -107,4 +111,49 @@ body{
 .jobCard-heading {
   display: flex;
   gap: 1cqw;
+  align-items: start;
 }
+
+.title{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8cqw;
+    
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    gap:1cqw;
+    padding-top: 2cqw;
+}
+
+p{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.image-container{
+    width: 25%;
+}
+
+.image{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+
+}
+.view-more-container{
+    position: relative;
+    width: 100%;
+}
+
+.view-more{
+        border: none;
+        padding: 1cqw;
+        font-weight: 300;
+        color: blue;
+        width: 100%;
+        background: transparent;
+      }
+      
