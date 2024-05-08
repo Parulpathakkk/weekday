@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
+const goldenIconStyle = {
+  color: "gold",
+};
 
 const JobCard = (props) => {
-  const { jobData } = props;
+  const {jobData} = props;
   const {
     companyName,
     jobRole,
@@ -12,7 +16,8 @@ const JobCard = (props) => {
     minExp,
     minJdSalary,
     salaryCurrencyCode,
-    location
+    location,
+    jdLink,
   } = jobData;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -21,52 +26,71 @@ const JobCard = (props) => {
     setShowFullDescription(!showFullDescription);
   };
 
-  // Function to truncate the job description to 200 words
-  const truncateDescription = (description) => {
+  // Description to 200 words
+  const ReduceDescription = (description) => {
     const words = description.split(" ");
-    if (words.length > 70) {
-      return words.slice(0, 70).join(" ") + "...";
+    if (words.length > 60) {
+      return words.slice(0, 60).join(" ") + "...";
     }
     return description;
   };
 
-  // Function to replace null values with "N/A"
+  // Replace null values with "N/A"
   const replaceNullWithNA = (value) => {
     return value === null ? "N/A" : value;
   };
 
+  // Capitalize the first letter of a string
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   return (
     <div className="jobCard">
-    <div>
-      <div className="jobCard-heading">
-        <div className="image-container">
-          <img className="image" src={logoUrl} alt={companyName} />
+      <div>
+        <div className="jobCard-heading">
+          <div className="image-container">
+            <img className="image" src={logoUrl} alt={companyName} />
+          </div>
+          <div className="title">
+            <h3 className="">{replaceNullWithNA(companyName)}</h3>
+            <p className="small-text">{replaceNullWithNA(capitalizeFirstLetter(jobRole))}</p>
+            <h5 className="">
+              {replaceNullWithNA(capitalizeFirstLetter(location))}
+            </h5>
+          </div>
         </div>
-        <div className="title">
-          <p>{replaceNullWithNA(companyName)}</p>
-          <p>{replaceNullWithNA(jobRole)}</p>
-          <p>{replaceNullWithNA(location)}</p>
+        <div className="description">
+          <h4 className="">
+            Estimated Salary: ${replaceNullWithNA(minJdSalary)} - $
+            {replaceNullWithNA(maxJdSalary)}{" "}
+            {replaceNullWithNA(salaryCurrencyCode)}
+          </h4>
+
+          <div className="view-more-container small-text">
+            <p>About Company:</p>
+            <p>
+              {showFullDescription
+                ? replaceNullWithNA(jobDetailsFromCompany)
+                : ReduceDescription(replaceNullWithNA(jobDetailsFromCompany))}
+            </p>
+            {replaceNullWithNA(jobDetailsFromCompany).split(" ").length >
+              60 && (
+              <button className="view-more" onClick={toggleDescription}>
+                {showFullDescription ? "View Less" : "View More"}
+              </button>
+            )}
+          </div>
+          <div className="exp-section">
+            <p>Experience Required: </p>
+            <h4> {replaceNullWithNA(minExp)} -{" "}
+            {replaceNullWithNA(maxExp)} YOE</h4>
+          </div>
+          <a href={jdLink} target="_blank" className="easy-apply">
+            <ElectricBoltIcon fontSize="small" style={goldenIconStyle} />
+           <p> Easy Apply</p>
+          </a>
         </div>
-      </div>
-      <div className="description">
-        <p>
-          Estimated Salary: {replaceNullWithNA(minJdSalary)} - {replaceNullWithNA(maxJdSalary)} {replaceNullWithNA(salaryCurrencyCode)}
-        </p>
-        <p>About the Company:</p>
-        <div className="view-more-container">
-        {/* Render full description if showFullDescription is true, otherwise render truncated description */}
-        <p>{showFullDescription ? replaceNullWithNA(jobDetailsFromCompany) : truncateDescription(replaceNullWithNA(jobDetailsFromCompany))}</p>
-        {/* Render "View More" button if the description is longer than 200 words */}
-        {replaceNullWithNA(jobDetailsFromCompany).split(" ").length > 70 && (
-          <button className="view-more" onClick={toggleDescription}>
-            {showFullDescription ? "View Less" : "View More"}
-          </button>
-        )}
-        </div>
-        <p>
-          Experience: {replaceNullWithNA(minExp)} - {replaceNullWithNA(maxExp)}
-        </p>
-      </div>
       </div>
     </div>
   );

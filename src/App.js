@@ -1,12 +1,10 @@
 // App.js
 import React from "react";
 import ProfileLeft from "./components/ProfileLeft";
-// import JobSection from './components/JobSection';
 import ProfileRight from "./components/ProfileRight";
 import JobSection from "./components/JobSection";
 import { Divider } from "@mui/material";
 
-// import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 
 
@@ -23,7 +21,6 @@ const App = () => {
       </div>
       <div className="profile">
         {" "}
-        <Divider orientation="vertical"/>
         <ProfileRight />
        
       </div>

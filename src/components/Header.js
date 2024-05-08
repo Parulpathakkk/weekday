@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Toolbar } from '@mui/material'
+import { Toolbar } from '@mui/material'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
@@ -13,9 +13,8 @@ const Header = () => {
       👋  Parul
       
     </Toolbar>
-    <div className="right-arrow"><KeyboardArrowLeftIcon/></div>
+    <div className="right-arrow"><KeyboardArrowLeftIcon fontSize='small'/></div>
     </div>
-    {/* <Divider/> */}
     </>
   )
 }
